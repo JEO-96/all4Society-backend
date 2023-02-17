@@ -1,9 +1,13 @@
-package com.example.all4society;
+package com.example.all4society.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.all4society.Member;
+import com.example.all4society.MemberDto;
+import com.example.all4society.MemberRepository;
+import com.example.all4society.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
