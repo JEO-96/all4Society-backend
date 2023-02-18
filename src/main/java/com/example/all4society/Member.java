@@ -21,7 +21,7 @@ import lombok.Setter;
 public class Member {
 	
 	@Id
-	@Column(name="member_id", nullable = false)
+	@Column(name="member_id", nullable = false, unique = true)
 	private String memberId;
 	
 	@Column(name="member_pw")
