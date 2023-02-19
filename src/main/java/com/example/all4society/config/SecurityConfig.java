@@ -1,5 +1,7 @@
 package com.example.all4society.config;
 
+import com.example.all4society.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity // 스프링시큐리티필터체인이 자동으로 포함된다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Bean
     public BCryptPasswordEncoder encoder() {

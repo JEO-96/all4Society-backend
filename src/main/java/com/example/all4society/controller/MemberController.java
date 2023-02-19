@@ -3,6 +3,7 @@ package com.example.all4society.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.example.all4society.Member;
 import com.example.all4society.MemberDto;
@@ -25,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 
+	final private static Logger LOG = Logger.getGlobal();
+	public static final String SECURED_TEXT = "Hello from the secured resource!";
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -63,6 +66,11 @@ public class MemberController {
 			map.put("result", e.getMessage());
 		}
 		return map;
+	}
+
+	@PostMapping(value = "login.json")
+	public void login() {
+		LOG.info("GET successfully called on /login resource");
 	}
 
 }

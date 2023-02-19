@@ -1,9 +1,6 @@
 package com.example.all4society;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +32,14 @@ public class Member {
 	
 	@Column(name="member_intro")
 	private String memberIntro;
+
+	@Column(name = "member_hint", nullable = false)
+	private String memberHint;
+
+	@Column(name = "member_answer", nullable = false)
+	private String memberAnswer;
+
+	private String role;	// USER, ADMIN
 	
 	public static Member createMember(MemberDto memberDto) {
 		Member member = new Member();
