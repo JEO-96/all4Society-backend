@@ -23,10 +23,10 @@ public class PrincipalDetailsService implements UserDetailsService{
     // 2.리턴이 잘되면 자동으로 MemberDetails 타입을 세션으로 만든다.
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
 
-        Member memberEntity = memberRepository.findByMemberId(username);
-        log.info(username);
+        Member memberEntity = memberRepository.findByMemberId(memberId);
+        log.info(memberId);
 
         if(memberEntity == null) {
             return null;

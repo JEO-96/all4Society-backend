@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface MemberRepository extends JpaRepository<Member, String>{
 	boolean existsByMemberId(String id);
-	Member findByMemberId(String id);
+	Member findByMemberId(String memberId);
 
 	@Query(value = "SELECT member_id FROM member WHERE member_id = :id and member_answer = :answer", nativeQuery = true)
 	Member findByMemberId_Answer(String id, String answer);
