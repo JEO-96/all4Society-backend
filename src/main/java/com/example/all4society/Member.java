@@ -2,6 +2,7 @@ package com.example.all4society;
 
 import javax.persistence.*;
 
+import com.example.all4society.dto.member.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,8 +41,9 @@ public class Member {
 	private String memberAnswer;
 
 	private String role;	// USER, ADMIN
-	
+
 	public static Member createMember(MemberDto memberDto) {
+
 		Member member = new Member();
 		member.setMemberId(memberDto.getMemberId());
 		member.setMemberPw(memberDto.getMemberPw());

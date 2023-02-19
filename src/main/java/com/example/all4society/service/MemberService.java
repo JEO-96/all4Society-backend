@@ -1,11 +1,13 @@
-package com.example.all4society;
+package com.example.all4society.service;
 
+import com.example.all4society.Member;
+import com.example.all4society.dto.member.MemberDto;
+import com.example.all4society.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.beanvalidation.CustomValidatorBean;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -22,6 +24,9 @@ public class MemberService {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final EntityManager em;
 	public Member saveMember(Member member) {
+		String rawPassword = member.getMemberPw();
+		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+		member.setMemberPw(encPassword);
 		return memberRepository.save(member);
 	}
 	
