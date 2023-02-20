@@ -62,4 +62,13 @@ public class Member {
 		member.setRole("ROLE_USER");
 		return member;
 	}
+	
+	public void updateMember(MemberDto memberDto, String pw) {
+	      this.memberPw = pw;
+	      this.memberPhone = memberDto.getMemberPhone();
+	      this.memberBirth = memberDto.getMemberBirth();
+	      this.memberHint = memberDto.getMemberHint();
+	      this.memberAnswer = memberDto.getMemberAnswer();
+	      this.memberIntro = memberDto.getMemberIntro();
+	   }
 }
