@@ -10,6 +10,7 @@ import com.example.all4society.MemberRepository;
 import com.example.all4society.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/api/member")
@@ -67,7 +71,7 @@ public class MemberController {
 	}
 
 	@PostMapping(value = "/login")
-	public Map<String, Object> login(@RequestBody MemberDto memberDto) {
+	public Map<String, Object> login(@RequestBody MemberDto memberDto, Model model, HttpServletRequest request, HttpSession session) {
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberDto", memberDto);
@@ -76,6 +80,8 @@ public class MemberController {
 
 		if (member.getMemberPw().equals(memberDto.getMemberPw())){
 			map.put("status", 200);
+			session.setAttribute("sessionId", memberRepository.getById(member.getMemberId())); // 세션값 등록
+			model.addAttribute("sessionId", session.getAttribute("sessionId"));
 		} else {
 			map.put("status", -1);
 		}
