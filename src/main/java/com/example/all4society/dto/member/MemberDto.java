@@ -17,5 +17,7 @@ public class MemberDto {
 	private String memberBirth;
 	
 	private String memberIntro;
+	private String memberHint;
+	private String memberAnswer;
 
 }

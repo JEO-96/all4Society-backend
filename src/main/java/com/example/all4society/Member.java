@@ -29,10 +29,10 @@ public class Member {
 	@Column(name="member_intro")
 	private String memberIntro;
 
-	@Column(name = "member_hint", nullable = false)
+	@Column(name = "member_hint")
 	private String memberHint;
 
-	@Column(name = "member_answer", nullable = false)
+	@Column(name = "member_answer")
 	private String memberAnswer;
 
 	private String role;	// USER, ADMIN
@@ -45,6 +45,9 @@ public class Member {
 		member.setMemberPhone(memberDto.getMemberPhone());
 		member.setMemberBirth(memberDto.getMemberBirth());
 		member.setMemberIntro(memberDto.getMemberIntro());
+		member.setMemberHint(memberDto.getMemberHint());
+		member.setMemberAnswer(memberDto.getMemberAnswer());
+		member.setRole("ROLE_USER");
 		return member;
 	}
 }
