@@ -19,7 +19,16 @@ public class Member {
 	
 	@Column(name="member_pw")
 	private String memberPw;
-	
+
+	@Column(name = "member_name")	// 성명
+	private String memberName;
+
+	@Column(name = "member_department")	// 부서
+	private String memberDepartment;
+
+	@Column(name = "member_rank")	// 	직급
+	private String memberRank;
+
 	@Column(name="member_phone")
 	private String memberPhone;
 	
@@ -47,6 +56,9 @@ public class Member {
 		member.setMemberIntro(memberDto.getMemberIntro());
 		member.setMemberHint(memberDto.getMemberHint());
 		member.setMemberAnswer(memberDto.getMemberAnswer());
+		member.setMemberDepartment(memberDto.getMemberDepartment());
+		member.setMemberName(memberDto.getMemberName());
+		member.setMemberRank(memberDto.getMemberRank());
 		member.setRole("ROLE_USER");
 		return member;
 	}

@@ -24,9 +24,6 @@ public class MemberService {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final EntityManager em;
 	public Member saveMember(Member member) {
-		String rawPassword = member.getMemberPw();
-		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-		member.setMemberPw(encPassword);
 		return memberRepository.save(member);
 	}
 	
@@ -34,10 +31,10 @@ public class MemberService {
 	public Member 회원정보수정(String id, Member member){
 		Member memberEntity = memberRepository.findById(id).orElseThrow();
 
-		String rawPassword = member.getMemberPw();
-		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+//		String rawPassword = member.getMemberPw();
+//		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 
-		memberEntity.setMemberPw(encPassword);
+//		memberEntity.setMemberPw(encPassword);
 		memberEntity.setMemberPhone(member.getMemberPhone());
 		memberEntity.setMemberBirth(member.getMemberBirth());
 		memberEntity.setMemberIntro(member.getMemberIntro());

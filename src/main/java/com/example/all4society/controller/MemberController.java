@@ -9,6 +9,7 @@ import com.example.all4society.dto.member.MemberDto;
 import com.example.all4society.MemberRepository;
 import com.example.all4society.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,9 +66,29 @@ public class MemberController {
 		return map;
 	}
 
-	@PostMapping(value = "login.json")
-	public void login() {
-		LOG.info("GET successfully called on /login resource");
+	@PostMapping(value = "/login")
+	public Map<String, Object> login(@RequestBody MemberDto memberDto) {
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberDto", memberDto);
+		System.out.println(memberDto.getMemberId());
+		Member member = memberRepository.findByMemberId(memberDto.getMemberId());
+
+		if (member.getMemberPw().equals(memberDto.getMemberPw())){
+			map.put("status", 200);
+		} else {
+			map.put("status", -1);
+		}
+		return map;
 	}
+
+	@GetMapping("/findId")
+	public Member fineId(@RequestBody MemberDto memberDto){
+		System.out.println("아이디 찾기");
+		Member member = memberRepository.findByMemberNameAndMemberPhone(memberDto.getMemberName(), memberDto.getMemberPhone());
+		System.out.println("아이디 찾음");
+		return member;
+	}
+
 
 }
