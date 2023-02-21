@@ -1,15 +1,12 @@
-package com.example.all4society.controller;
+package com.example.all4society.member;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import com.example.all4society.Member;
-import com.example.all4society.dto.member.MemberDto;
 import com.example.all4society.MemberRepository;
-import com.example.all4society.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,5 +93,10 @@ public class MemberController {
 		return member;
 	}
 
+	@PostMapping("/getHint")
+	public Member findHint(@RequestBody MemberDto memberDto) {
+		Member member = memberRepository.findByMemberId(memberDto.getMemberId());
+		return member;
+	}
 
 }

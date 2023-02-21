@@ -1,4 +1,4 @@
-package com.example.all4society.dto.member;
+package com.example.all4society.member;
 
 import com.example.all4society.Member;
 

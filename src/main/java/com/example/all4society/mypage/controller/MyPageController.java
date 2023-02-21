@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.all4society.Member;
 import com.example.all4society.MemberRepository;
-import com.example.all4society.dto.member.MemberDto;
+import com.example.all4society.member.MemberDto;
 import com.example.all4society.mypage.service.MyPageService;
-import com.example.all4society.service.MemberService;
 
 @RestController
 @RequestMapping("/api")

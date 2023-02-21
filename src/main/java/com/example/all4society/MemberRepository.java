@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface MemberRepository extends JpaRepository<Member, String>{
@@ -20,4 +21,10 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 
 	Member findByMemberPhone(String memberPhone);
 
+//	@Modifying
+//	@Query(value = "UPDATE FROM member WHERE member_id = :")
+
+
+//	@Query(value = "select * from member where member_email =:memberEmail and member_name =:memberName and member_birth =:memberBirth and member_phone =:memberPhone and member_social = 'N'", nativeQuery = true)
+//	Member findPw(@Param ("memberEmail")String memberEmail, @Param ("memberName")String memberName, @Param ("memberBirth")String memberBirth, @Param ("memberPhone")String memberPhone);
 }

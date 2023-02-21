@@ -1,7 +1,6 @@
-package com.example.all4society.service;
+package com.example.all4society.member;
 
 import com.example.all4society.Member;
-import com.example.all4society.dto.member.MemberDto;
 import com.example.all4society.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.qlrm.mapper.JpaResultMapper;

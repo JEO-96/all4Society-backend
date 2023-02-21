@@ -2,7 +2,7 @@ package com.example.all4society;
 
 import javax.persistence.*;
 
-import com.example.all4society.dto.member.MemberDto;
+import com.example.all4society.member.MemberDto;
 import lombok.*;
 
 @Data

@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests() // 시큐리티 처리에 HttpServletRequest를 이용한다는 것을 의미
-                .mvcMatchers("/**", "/signup", "/members/**", "/item/**", "/images/**").permitAll() // permitAll을 통해 모든 사용자가
+                .mvcMatchers("/**").permitAll() // permitAll을 통해 모든 사용자가
                 // 인증 없이 해당 경로 접근 가능 설정
                 .mvcMatchers("/admin/**").hasRole("ADMIN") // Role이 ADMIN일때만 접근 가능하게 설정
                 .anyRequest().authenticated(); // 앞서 설정해준 경로를 제외한 나머지 경로들은 인증을 요구하도록 설정
