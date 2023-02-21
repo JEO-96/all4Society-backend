@@ -21,7 +21,7 @@ import com.example.all4society.calendar.service.CalendarService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
-@RequestMapping("/api/calendar")
+@RequestMapping("/api")
 @CrossOrigin("http://localhost:8082/")
 public class CalendarController {
 	

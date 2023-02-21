@@ -88,11 +88,11 @@ public class MemberController {
 		return map;
 	}
 
-	@GetMapping("/findId")
+	@PostMapping("/findId")
 	public Member fineId(@RequestBody MemberDto memberDto){
 		System.out.println("아이디 찾기");
-		Member member = memberRepository.findByMemberNameAndMemberPhone(memberDto.getMemberName(), memberDto.getMemberPhone());
-		System.out.println("아이디 찾음");
+		Member member = memberRepository.findByMemberPhone(memberDto.getMemberPhone());
+		System.out.println(member);
 		return member;
 	}
 
