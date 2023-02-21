@@ -68,12 +68,38 @@ public class BoardController {
 	
 	@GetMapping(value="/getBoard.json")
 	public List<Board> getBoard(String boardName) {
+		System.out.println(boardRepository.findAll());
 		return boardRepository.findAll();
 	}
 	
-	@GetMapping(value="/board.json")
-	public Board getAllBoard() {
-		return boardService.getBoardAll();
+	/*
+	 * @GetMapping(value="/board.json") public Board getAllBoard() { return
+	 * boardService.getBoardAll(); }
+	 */
+	
+	@GetMapping(value="/sport.json")
+	public List<Board> sport(){
+		return boardService.getBoardSport();
+		
+	}
+	
+	@GetMapping(value="/study.json")
+	public List<Board> study(){
+		System.out.println(boardService.getBoardStudy());
+		return boardService.getBoardStudy();
+		
+	}
+	
+	@GetMapping(value="/board/music")
+	public List<Board> music(){
+		return boardService.getBoardMusic();
+		
+	}
+	
+	@GetMapping(value="/board/trip")
+	public List<Board> trip(){
+		return boardService.getBoardTrip();
+		
 	}
 	
 
