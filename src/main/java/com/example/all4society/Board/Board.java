@@ -22,24 +22,53 @@ public class Board {
 	
 
 	@Id
-	@Column(name="board_name")
+	@Column(name="boardName")
 	private String boardName;
 	
-	@Column(name="board_intro")
+	@Column(name="boardIntro")
 	private String boardIntro;
 	
-	@Column(name="board_sub_intro")
-	private String boardSubIntro;
+	@Column(name="boardManagerName")
+	private String boardManagerName;
 	
-	@Column(name="board_people")
+	@Column(name="boardPeople")
 	private String boardPeople;
 	
+	@Column(name="boardCategory")
+	private String boardCategory;
+	
+	@Column(name="boardPlace")
+	private String boardPlace;
+	
+	@Column(name="boardTime")
+	private String boardTime;
+	
+	@Column(name="boardMoney")
+	private String boardMoney;
+	
+	@Column(name="boardCondition")
+	private String boardCondition;
+	
+	@Column(name="boardSubIntro")
+	private String boardSubIntro;
+	
+	@Column(name="boardManagerPhone")
+	private String boardManagerPhone;
+
 	public static Board createboard(BoardDto boardDto) {
 		Board board = new Board();
+		
 		board.setBoardName(boardDto.getBoardName());
 		board.setBoardIntro(boardDto.getBoardIntro());
-		board.setBoardSubIntro(boardDto.getBoardIntro());
+		board.setBoardManagerName(boardDto.getBoardManagerName());
 		board.setBoardPeople(boardDto.getBoardPeople());
+		board.setBoardCategory(boardDto.getBoardCategory());
+		board.setBoardCondition(boardDto.getBoardCondition());
+		board.setBoardMoney(boardDto.getBoardMoney());
+		board.setBoardTime(boardDto.getBoardTime());
+		board.setBoardSubIntro(boardDto.getBoardSubIntro());
+		board.setBoardPlace(boardDto.getBoardPlace());
+		board.setBoardManagerPhone(boardDto.getBoardManagerPhone());
 		return board;
 	}
 }
