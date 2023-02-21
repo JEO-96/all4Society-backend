@@ -1,10 +1,12 @@
 package com.example.all4society.Board;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(value = "/api/board")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:8082/")
 public class BoardController {
 
 	@Autowired
@@ -64,8 +67,8 @@ public class BoardController {
 	}
 	
 	@GetMapping(value="/getBoard.json")
-	public Board getBoard(String boardName) {
-		return boardService.getBoard(boardName);
+	public List<Board> getBoard(String boardName) {
+		return boardRepository.findAll();
 	}
 	
 	@GetMapping(value="/board.json")

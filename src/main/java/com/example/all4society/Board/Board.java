@@ -22,23 +22,23 @@ public class Board {
 	
 
 	@Id
-	@Column(name="boardName")
+	@Column(name="board_name")
 	private String boardName;
 	
-	@Column(name="boardIntro")
+	@Column(name="board_intro")
 	private String boardIntro;
 	
-	@Column(name="boardManagerName")
-	private String boardManagerName;
+	@Column(name="board_sub_intro")
+	private String boardSubIntro;
 	
-	@Column(name="boardPeople")
+	@Column(name="board_people")
 	private String boardPeople;
 	
 	public static Board createboard(BoardDto boardDto) {
 		Board board = new Board();
 		board.setBoardName(boardDto.getBoardName());
 		board.setBoardIntro(boardDto.getBoardIntro());
-		board.setBoardManagerName(boardDto.getBoardManagerName());
+		board.setBoardSubIntro(boardDto.getBoardIntro());
 		board.setBoardPeople(boardDto.getBoardPeople());
 		return board;
 	}
