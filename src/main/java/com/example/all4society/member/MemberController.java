@@ -86,10 +86,17 @@ public class MemberController {
 	}
 
 	@PostMapping("/findId")
-	public Member fineId(@RequestBody MemberDto memberDto){
+	public Member findId(@RequestBody MemberDto memberDto){
 		System.out.println("아이디 찾기");
 		Member member = memberRepository.findByMemberPhone(memberDto.getMemberPhone());
 		System.out.println(member);
+		return member;
+	}
+
+	@PostMapping("/findPw")
+	public Member findPw(@RequestBody MemberDto memberDto) {
+		System.out.println("비밀번호 찾기");
+		Member member = memberRepository.findByMemberIdAndMemberAnswer(memberDto.getMemberId(), memberDto.getMemberAnswer());
 		return member;
 	}
 

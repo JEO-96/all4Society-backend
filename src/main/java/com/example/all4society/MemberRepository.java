@@ -21,8 +21,8 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 
 	Member findByMemberPhone(String memberPhone);
 
-//	@Modifying
-//	@Query(value = "UPDATE FROM member WHERE member_id = :")
+	Member findByMemberIdAndMemberAnswer(String memberId, String memberAnswer);
+
 
 
 //	@Query(value = "select * from member where member_email =:memberEmail and member_name =:memberName and member_birth =:memberBirth and member_phone =:memberPhone and member_social = 'N'", nativeQuery = true)
