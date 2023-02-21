@@ -1,6 +1,7 @@
 package com.example.all4society.mypage.service;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,5 @@ public class MyPageService {
 
 		return memberEntity.getMemberId();
 	}
-
+	
 }

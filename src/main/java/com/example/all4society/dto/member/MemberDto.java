@@ -1,5 +1,7 @@
 package com.example.all4society.dto.member;
 
+import com.example.all4society.Member;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +23,6 @@ public class MemberDto {
 	private String memberIntro;
 	private String memberHint;
 	private String memberAnswer;
+	
 
 }

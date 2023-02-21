@@ -33,12 +33,14 @@ public class MyPageController {
 	private MyPageService myPageService;
 	
 	@GetMapping("/myPage")
-	public List<Member> myPage() {
-		return memberRepository.findAll();
+	public List<Member> myPage(HttpSession session) {
+		String userId = (String) session.getAttribute("sessionId");
+		return memberRepository.findAllByMemberId("1234");
 	}
 	
 	@PostMapping(value="/myPageModify.json")
-	public Map<String, Object> myPageModify(@RequestBody MemberDto memberDto) {
+	public Map<String, Object> myPageModify(@RequestBody MemberDto memberDto, HttpSession session) {
+		String userId = (String) session.getAttribute("sessionId");
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberDto", memberDto);
 		try {
