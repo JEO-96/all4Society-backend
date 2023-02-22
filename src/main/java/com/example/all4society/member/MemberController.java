@@ -95,7 +95,7 @@ public class MemberController {
 		System.out.println("아이디 찾기");
 		String userid = (String) session.getAttribute("sessionId");
 		Map<String, Object> map = new HashMap<>();
-		
+		System.out.println(memberDto.getMemberPhone());
 		if(memberRepository.findId(memberDto.getMemberPhone())==1) {
 			String result = memberRepository.findIdResult(memberDto.getMemberPhone());
 			map.put("check", 1);
@@ -111,10 +111,21 @@ public class MemberController {
 	}
 
 	@PostMapping("/findPw")
-	public Member findPw(@RequestBody MemberDto memberDto) {
+	public Map<String,Object> findPw(@RequestBody MemberDto memberDto) {
 		System.out.println("비밀번호 찾기");
-		Member member = memberRepository.findByMemberIdAndMemberAnswer(memberDto.getMemberId(), memberDto.getMemberAnswer());
-		return member;
+				Map<String, Object> map = new HashMap<>();
+		System.out.println(memberDto.getMemberPhone());
+		if(memberRepository.findPw(memberDto.getMemberPhone(),memberDto.getMemberId())==1) {
+			String result = memberRepository.findPwResult(memberDto.getMemberPhone(),memberDto.getMemberId());
+			map.put("check", 1);
+			map.put("result", result);
+			return map;
+
+		}else {
+			map.put("check", -1);
+			System.out.println("실패");
+			return map;
+		}
 	}
 
 //	@PostMapping("/getHint")

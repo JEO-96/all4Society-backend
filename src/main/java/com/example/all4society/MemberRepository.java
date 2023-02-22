@@ -14,11 +14,30 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	@Query(value="select count(*) from member where member_id = :memberId and member_pw =:memberPw", nativeQuery = true)
 	int login(String memberId, String memberPw);
 	
-	@Query(value="select member_id from member where member_phone = :memberPhone", nativeQuery = true)
+	//아이디 조회
+	@Query(value="select count(*) from member where member_phone = :memberPhone", nativeQuery = true)
 	int findId(String memberPhone);
-	
+	//아이디 조회 값
 	@Query(value="select member_id from member where member_phone = :memberPhone", nativeQuery = true)
 	String findIdResult(String memberPhone);
+	
+	//비밀번호 조회
+	@Query(value="select count(*) from member where member_phone = :memberPhone and member_id = :memberId", nativeQuery = true)
+	int findPw(String memberPhone, String memberId);
+	//비밀번호 조회 값
+	@Query(value="select member_pw from member where member_phone = :memberPhone and member_id = :memberId", nativeQuery = true)
+	String findPwResult(String memberPhone, String memberId);
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@Query(value = "SELECT member_id FROM member WHERE member_id = :id and member_answer = :answer", nativeQuery = true)
 	Member findByMemberId_Answer(String id, String answer);
