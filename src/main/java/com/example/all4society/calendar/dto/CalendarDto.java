@@ -4,11 +4,13 @@ import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter
+@Getter @Setter @ToString
 public class CalendarDto {
 	private int id;
-	private String ctitle;
-	private Date cstart;
-	private Date cend;
+	private String title;
+	private Date start;
+	private Date end;
+	private String user;
 }
