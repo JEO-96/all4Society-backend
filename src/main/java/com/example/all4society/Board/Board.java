@@ -55,6 +55,9 @@ public class Board {
 	@Column(name="boardManagerPhone")
 	private String boardManagerPhone;
 
+	@Column(name="image")
+	private String image;
+	
 	public static Board createboard(BoardDto boardDto) {
 		Board board = new Board();
 		
@@ -69,6 +72,7 @@ public class Board {
 		board.setBoardSubIntro(boardDto.getBoardSubIntro());
 		board.setBoardPlace(boardDto.getBoardPlace());
 		board.setBoardManagerPhone(boardDto.getBoardManagerPhone());
+		board.setImage(boardDto.getImage());
 		return board;
 	}
 }

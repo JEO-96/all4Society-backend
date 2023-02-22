@@ -22,4 +22,5 @@ public class BoardDto {
 	private String boardPhoto5;
 	private String boardPhoto6;
 	private String boardManagerPhone;
+	private String image;
 }
