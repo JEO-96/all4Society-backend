@@ -90,13 +90,13 @@ public class BoardController {
 		
 	}
 	
-	@GetMapping(value="/board/music")
+	@GetMapping(value="/music.json")
 	public List<Board> music(){
 		return boardService.getBoardMusic();
 		
 	}
 	
-	@GetMapping(value="/board/trip")
+	@GetMapping(value="/trip.json")
 	public List<Board> trip(){
 		return boardService.getBoardTrip();
 		

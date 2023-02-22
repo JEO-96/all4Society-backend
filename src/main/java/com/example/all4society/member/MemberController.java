@@ -34,14 +34,28 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@GetMapping(value="/idcheck.json")
-	public Map<String, Object> idCheckGET(@RequestParam(name="id") String id) {
+	@GetMapping(value = "/index")
+	public String index(HttpSession session) {
+		String userid = (String) session.getAttribute("sessionId");
+		System.out.println(userid+"---");
+		return userid;
+	}
+	
+	@GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        System.out.println("로그아웃");
+        return "redirect:/";
+    }
+	
+	@GetMapping(value = "/idcheck.json")
+	public Map<String, Object> idCheckGET(@RequestParam(name = "id") String id) {
 		System.out.println(id);
 		Map<String, Object> map = new HashMap<>();
 		try {
 			boolean ret = memberRepository.existsByMemberId(id);
 			map.put("status", 200);
-			map.put("result", ret); //있으면 참, 없으면 거짓
+			map.put("result", ret); // 있으면 참, 없으면 거짓
 
 		} catch (Exception e) {
 			map.put("status", -1);
@@ -50,8 +64,7 @@ public class MemberController {
 		return map;
 	}
 
-
-	@PostMapping(value="/join.json")
+	@PostMapping(value = "/join.json")
 	public Map<String, Object> joinPOST(@RequestBody MemberDto memberDto) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberDto", memberDto);
@@ -60,8 +73,7 @@ public class MemberController {
 			Member member = Member.createMember(memberDto);
 			memberService.saveMember(member);
 			System.out.println("==============저장됐니?");
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			map.put("status", -1);
 			map.put("result", e.getMessage());
 		}
@@ -69,40 +81,42 @@ public class MemberController {
 	}
 
 	@PostMapping(value = "/login")
-	public Map<String, Object> login(@RequestBody MemberDto memberDto, Model model, HttpServletRequest request, HttpSession session) {
+	public Map<String, Object> login(@RequestBody MemberDto memberDto, Model model, HttpServletRequest request,
+			HttpSession session) {
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberDto", memberDto);
 		System.out.println(memberDto.getMemberId());
 		System.out.println(memberDto.getMemberPw());
-		System.out.println( memberRepository.login(memberDto.getMemberId(),memberDto.getMemberPw()));
-		if ( memberRepository.login(memberDto.getMemberId(),memberDto.getMemberPw())==1){
+		System.out.println(memberRepository.login(memberDto.getMemberId(), memberDto.getMemberPw()));
+		if (memberRepository.login(memberDto.getMemberId(), memberDto.getMemberPw()) == 1) {
 			map.put("check", 1);
 			session.setAttribute("sessionId", memberDto.getMemberId()); // 세션값 등록
 			model.addAttribute("sessionId", session.getAttribute("sessionId"));
 			return map;
 		} else {
 			map.put("check", -1);
-				System.out.println("로그인 실패");
-				return map;
-				//ㅇㄹㅇㄹㄷ
+			System.out.println("로그인 실패");
+			return map;
+			// ㅇㄹㅇㄹㄷ
 		}
 
 	}
+	
+
 
 	@PostMapping("/findId")
-	public Map<String, Object> findId(@RequestBody MemberDto memberDto, HttpSession session){
+	public Map<String, Object> findId(@RequestBody MemberDto memberDto, HttpSession session) {
 		System.out.println("아이디 찾기");
-		String userid = (String) session.getAttribute("sessionId");
 		Map<String, Object> map = new HashMap<>();
 		System.out.println(memberDto.getMemberPhone());
-		if(memberRepository.findId(memberDto.getMemberPhone())==1) {
+		if (memberRepository.findId(memberDto.getMemberPhone()) == 1) {
 			String result = memberRepository.findIdResult(memberDto.getMemberPhone());
 			map.put("check", 1);
 			map.put("result", result);
 			return map;
 
-		}else {
+		} else {
 			map.put("check", -1);
 			System.out.println("실패");
 			return map;
@@ -111,17 +125,17 @@ public class MemberController {
 	}
 
 	@PostMapping("/findPw")
-	public Map<String,Object> findPw(@RequestBody MemberDto memberDto) {
+	public Map<String, Object> findPw(@RequestBody MemberDto memberDto) {
 		System.out.println("비밀번호 찾기");
-				Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		System.out.println(memberDto.getMemberPhone());
-		if(memberRepository.findPw(memberDto.getMemberPhone(),memberDto.getMemberId())==1) {
-			String result = memberRepository.findPwResult(memberDto.getMemberPhone(),memberDto.getMemberId());
+		if (memberRepository.findPw(memberDto.getMemberPhone(), memberDto.getMemberId()) == 1) {
+			String result = memberRepository.findPwResult(memberDto.getMemberPhone(), memberDto.getMemberId());
 			map.put("check", 1);
 			map.put("result", result);
 			return map;
 
-		}else {
+		} else {
 			map.put("check", -1);
 			System.out.println("실패");
 			return map;
