@@ -9,8 +9,17 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface MemberRepository extends JpaRepository<Member, String>{
 	boolean existsByMemberId(String id);
-	Member findByMemberId(String memberId);
-
+	int findByMemberIdAndMemberPw(String memberId, String memberPw);
+	
+	@Query(value="select count(*) from member where member_id = :memberId and member_pw =:memberPw", nativeQuery = true)
+	int login(String memberId, String memberPw);
+	
+	@Query(value="select member_id from member where member_phone = :memberPhone", nativeQuery = true)
+	int findId(String memberPhone);
+	
+	@Query(value="select member_id from member where member_phone = :memberPhone", nativeQuery = true)
+	String findIdResult(String memberPhone);
+	
 	@Query(value = "SELECT member_id FROM member WHERE member_id = :id and member_answer = :answer", nativeQuery = true)
 	Member findByMemberId_Answer(String id, String answer);
 	

@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import com.example.all4society.Member;
-import com.example.all4society.MemberRepository;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
+import com.example.all4society.Member;
+import com.example.all4society.MemberRepository;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value = "/api/member")
@@ -73,24 +74,39 @@ public class MemberController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberDto", memberDto);
 		System.out.println(memberDto.getMemberId());
-		Member member = memberRepository.findByMemberId(memberDto.getMemberId());
-
-		if (member.getMemberPw().equals(memberDto.getMemberPw())){
-			map.put("status", 200);
-			session.setAttribute("sessionId", memberRepository.getById(member.getMemberId())); // 세션값 등록
+		System.out.println(memberDto.getMemberPw());
+		System.out.println( memberRepository.login(memberDto.getMemberId(),memberDto.getMemberPw()));
+		if ( memberRepository.login(memberDto.getMemberId(),memberDto.getMemberPw())==1){
+			map.put("check", 1);
+			session.setAttribute("sessionId", memberDto.getMemberId()); // 세션값 등록
 			model.addAttribute("sessionId", session.getAttribute("sessionId"));
+			return map;
 		} else {
-			map.put("status", -1);
+			map.put("check", -1);
+				System.out.println("로그인 실패");
+				return map;
 		}
-		return map;
+
 	}
 
 	@PostMapping("/findId")
-	public Member findId(@RequestBody MemberDto memberDto){
+	public Map<String, Object> findId(@RequestBody MemberDto memberDto, HttpSession session){
 		System.out.println("아이디 찾기");
-		Member member = memberRepository.findByMemberPhone(memberDto.getMemberPhone());
-		System.out.println(member);
-		return member;
+		String userid = (String) session.getAttribute("sessionId");
+		Map<String, Object> map = new HashMap<>();
+		
+		if(memberRepository.findId(memberDto.getMemberPhone())==1) {
+			String result = memberRepository.findIdResult(memberDto.getMemberPhone());
+			map.put("check", 1);
+			map.put("result", result);
+			return map;
+
+		}else {
+			map.put("check", -1);
+			System.out.println("실패");
+			return map;
+		}
+
 	}
 
 	@PostMapping("/findPw")
@@ -100,10 +116,10 @@ public class MemberController {
 		return member;
 	}
 
-	@PostMapping("/getHint")
-	public Member findHint(@RequestBody MemberDto memberDto) {
-		Member member = memberRepository.findByMemberId(memberDto.getMemberId());
-		return member;
-	}
+//	@PostMapping("/getHint")
+//	public Member findHint(@RequestBody MemberDto memberDto) {
+//		Member member = memberRepository.findByMemberId(memberDto.getMemberId());
+//		return member;
+//	}
 
 }
