@@ -28,7 +28,8 @@ import lombok.ToString;
 public class Calendar {
 	
 	@Id
-	@Column(name="c_num")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="c_num", columnDefinition = "serial")
 	private int id;
 	
 	@Column(name="c_title")
@@ -40,12 +41,17 @@ public class Calendar {
 	@Column(name="c_end")
 	private Date end;
 	
+	@Column(name="c_user")
+	private String user;
+	
 	public static Calendar createCalendar(CalendarDto calendarDto) {
 		Calendar calendar = new Calendar();
 		calendar.setId(calendarDto.getId());
-		calendar.setTitle(calendarDto.getCtitle());
-		calendar.setStart(calendarDto.getCstart());
-		calendar.setEnd(calendarDto.getCend());
+		calendar.setTitle(calendarDto.getTitle());
+		calendar.setStart(calendarDto.getStart());
+		calendar.setEnd(calendarDto.getEnd());
+//		calendar.setUser(calendarDto.getUser());
+		calendar.setUser("1234");
 		
 		return calendar;
 	}
