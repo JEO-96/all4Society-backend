@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.servlet.http.HttpSession;
 
 import com.example.all4society.calendar.dto.CalendarDto;
 
@@ -44,14 +45,14 @@ public class Calendar {
 	@Column(name="c_user")
 	private String user;
 	
-	public static Calendar createCalendar(CalendarDto calendarDto) {
+	public static Calendar createCalendar(CalendarDto calendarDto, String userId) {
 		Calendar calendar = new Calendar();
 		calendar.setId(calendarDto.getId());
 		calendar.setTitle(calendarDto.getTitle());
 		calendar.setStart(calendarDto.getStart());
 		calendar.setEnd(calendarDto.getEnd());
 //		calendar.setUser(calendarDto.getUser());
-		calendar.setUser("1234");
+		calendar.setUser(userId);
 		
 		return calendar;
 	}

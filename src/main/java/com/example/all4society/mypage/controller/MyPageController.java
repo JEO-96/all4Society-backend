@@ -33,7 +33,7 @@ public class MyPageController {
 	@GetMapping("/myPage")
 	public List<Member> myPage(HttpSession session) {
 		String userId = (String) session.getAttribute("sessionId");
-		return memberRepository.findAllByMemberId("1234");
+		return memberRepository.findAllByMemberId(userId);
 	}
 	
 	@PostMapping(value="/myPageModify.json")
@@ -42,7 +42,7 @@ public class MyPageController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberDto", memberDto);
 		try {
-			myPageService.infoModify(memberDto);
+			myPageService.infoModify(memberDto, userId);
 		}
 		catch (Exception e) {
 			map.put("status", -1);

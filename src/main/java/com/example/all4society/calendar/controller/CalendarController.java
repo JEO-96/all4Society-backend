@@ -41,19 +41,19 @@ public class CalendarController {
 
 	@GetMapping("/calendarview")
 	public List<Calendar> findCalendar(HttpSession session) {
-//		String userId = (String) session.getAttribute("sessionId");
+		String userId = (String) session.getAttribute("sessionId");
 //		System.out.println("session : " + userId);
-		System.out.println(calendarRepository.findAllByCUser("1234"));
-		return calendarRepository.findAllByCUser("1234");
+		System.out.println(calendarRepository.findAllByCUser(userId));
+		return calendarRepository.findAllByCUser(userId);
 	}
 	
 	@PostMapping("/calendarInsert")
-	public Map<String, Object> calendarInsert(@RequestBody CalendarDto calendarDto) {
-		System.out.println(calendarDto);
+	public Map<String, Object> calendarInsert(@RequestBody CalendarDto calendarDto, HttpSession session) {
+		String userId = (String)session.getAttribute("sessionId");
 		Map<String, Object> map = new HashMap<>();
 		map.put("calendarDto", calendarDto);
 		try {
-			Calendar calendar = Calendar.createCalendar(calendarDto);
+			Calendar calendar = Calendar.createCalendar(calendarDto, userId);
 			calendarService.saveCalendar(calendar);
 		} catch (Exception e) {
 			map.put("status", -1);
@@ -68,8 +68,7 @@ public class CalendarController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("calendarDto", calendarDto);
 		System.out.println("======================삭제 찍혀?:" + calendarDto);
-		calendarRepository.deleteByCtitleAndCStartAndCEnd(calendarDto.getTitle(), calendarDto.getStart(), calendarDto.getEnd());
-//		int id = Integer.parseInt(map.get("id"));
+		calendarRepository.deleteMethod(calendarDto.getTitle(), calendarDto.getStart());
 		
 	}
 	

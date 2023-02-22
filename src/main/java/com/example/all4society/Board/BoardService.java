@@ -2,10 +2,13 @@ package com.example.all4society.Board;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -14,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardService {
 	
 	private final BoardRepository boardRepository;
+	
 	
 	public Board saveBoard(Board board) {
 		return boardRepository.save(board);
@@ -45,6 +49,7 @@ public class BoardService {
 	public List<Board> getBoardMusic( ){
 		return boardRepository.getBoardMusic();
 	}
+	
 	
 
 

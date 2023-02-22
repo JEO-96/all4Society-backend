@@ -21,8 +21,8 @@ public class MyPageService {
 	
 	//임시 세션값임
 	@Transactional
-	public String infoModify(MemberDto memberDto){
-		Member memberEntity = memberRepository.findById(memberDto.getMemberId()).orElseThrow();
+	public String infoModify(MemberDto memberDto, String userId){
+		Member memberEntity = memberRepository.findById(userId).orElseThrow();
 
 		String rawPassword = memberDto.getMemberPw();
 		memberEntity.updateMember(memberDto, rawPassword);
