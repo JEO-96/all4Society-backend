@@ -16,16 +16,16 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	@Query(value = "SELECT * FROM all4board " , nativeQuery = true)
 	Board getBoardAll(); // 전체 게시물 보여주기
 	
-	@Query(value = "SELECT * FROM all4board where board_category='스터디'" , nativeQuery = true)
+	@Query(value = "SELECT * FROM all4board where board_category='스터디' order by date desc" , nativeQuery = true)
 	List<Board> getBoardStudy(); // 스터디 게시물 보여주기
 
-	@Query(value = "SELECT * FROM all4board where board_category='스포츠'" , nativeQuery = true)
+	@Query(value = "SELECT * FROM all4board where board_category='스포츠' order by date desc" , nativeQuery = true)
 	List<Board> getBoardSport(); // 스터디 게시물 보여주기
 
-	@Query(value = "SELECT * FROM all4board where board_category='음악'" , nativeQuery = true)
+	@Query(value = "SELECT * FROM all4board where board_category='음악' order by date desc" , nativeQuery = true)
 	List<Board> getBoardMusic(); // 스터디 게시물 보여주기
 
-	@Query(value = "SELECT * FROM all4board where board_category='여행'" , nativeQuery = true)
+	@Query(value = "SELECT * FROM all4board where board_category='여행' order by date desc" , nativeQuery = true)
 	List<Board> getBoardTrip( ); // 스터디 게시물 보여주기
 	
 }

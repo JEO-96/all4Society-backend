@@ -1,9 +1,13 @@
 package com.example.all4society.Board;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -58,6 +62,10 @@ public class Board {
 	@Column(name="image")
 	private String image;
 	
+	@ColumnDefault("now()") //default 0
+	@Column(name="date")
+	private Date date;
+	
 	public static Board createboard(BoardDto boardDto) {
 		Board board = new Board();
 		
@@ -73,6 +81,7 @@ public class Board {
 		board.setBoardPlace(boardDto.getBoardPlace());
 		board.setBoardManagerPhone(boardDto.getBoardManagerPhone());
 		board.setImage(boardDto.getImage());
+		board.setDate(boardDto.getDate());
 		return board;
 	}
 }

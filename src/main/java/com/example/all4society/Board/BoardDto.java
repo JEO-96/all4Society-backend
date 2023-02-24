@@ -1,5 +1,7 @@
 package com.example.all4society.Board;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -23,4 +25,5 @@ public class BoardDto {
 	private String boardPhoto6;
 	private String boardManagerPhone;
 	private String image;
+	private Date date;
 }
